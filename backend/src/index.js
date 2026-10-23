@@ -7,7 +7,9 @@ import connectDB from './lib/db.js';
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT
-    // routes
+    // middlewares to extract json data from request body
+app.use(express.json());
+// routes
 app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
