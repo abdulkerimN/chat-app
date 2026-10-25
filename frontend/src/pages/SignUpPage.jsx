@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import {MessageSquare,User,Mail,Lock,Eye,EyeOff,Loader} from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagepattern";
 import toast from "react-hot-toast";
-
 const SignUpPage = () => {
+const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -26,12 +26,21 @@ if (formData.password.length < 6) return toast.error("Password must be at least 
 return true;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const success = validateForm();
-    if (success === true) signup(formData);
-  };
+  const success = validateForm();
+
+  if (success !== true) return;
+
+  const isSuccess = await signup(formData);
+  if (isSuccess === true) {
+    navigate("/", { replace: true });
+console.log(authUser);
+  }
+};
+
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-[#1c232b] text-slate-100">
