@@ -9,5 +9,26 @@ export default {
     theme: {
         extend: {},
     },
+    // plugins: [daisyui],
+    daisyui: {
+        themes: [
+            "light",
+            "dark",
+            "cupcake",
+            "bumblebee",
+            "synthwave",
+            "retro",
+            "cyberpunk",
+            "valentine",
+            "halloween",
+            "forest",
+            "aqua",
+            "luxury",
+            "dracula",
+            "night",
+            "coffee",
+            "winter",
+        ],
+    },
     plugins: [daisyui],
 }
