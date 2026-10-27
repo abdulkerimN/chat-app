@@ -1,116 +1,116 @@
-
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import {MessageSquare,User,Mail,Lock,Eye,EyeOff,Loader} from "lucide-react";
-import { Link ,useNavigate} from "react-router-dom";
-import AuthImagePattern from "../components/AuthImagepattern";
-import toast from "react-hot-toast";
+import AuthImagepattern from "../components/AuthImagepattern";
+import { MessageSquare, User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+
 const SignUpPage = () => {
-const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
   });
 
-  const { signup, isSigningUp, } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
-if (!formData.fullname.trim()) return toast.error("Full name is required");
-if (!formData.email.trim()) return toast.error("Email is required");
-if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
-if (!formData.password) return toast.error("Password is required");
-if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
-return true;
+    if (!formData.fullName.trim()) {
+      return false;
+    }
+
+    if (!formData.email.trim()) {
+      return false;
+    }
+
+    if (!formData.password) {
+      return false;
+    }
+
+    if (formData.password.length < 6) {
+      return false;
+    }
+
+    return true;
   };
 
-  
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const success = validateForm();
+    if (!validateForm()) return;
 
-  if (success !== true) return;
-
-  const isSuccess = await signup(formData);
-  if (isSuccess === true) {
-    navigate("/", { replace: true });
-console.log(authUser);
-  }
-};
-
+    signup(formData);
+  };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-[#1c232b] text-slate-100">
-      {/* Left side - original position preserved */}
+    <div className="min-h-screen grid lg:grid-cols-2 bg-base-100 text-base-content">
+      {/* Left Side: Signup Form */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-
-          {/* LOGO */}
+          {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-violet-500/10 flex items-center justify-center transition-colors group-hover:bg-violet-500/20">
-                <MessageSquare className="size-6 text-violet-400" />
+              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <MessageSquare className="size-6 text-primary" />
               </div>
 
-              <h1 className="text-2xl font-bold mt-2 text-slate-100">
+              <h1 className="text-2xl font-bold mt-2">
                 Create Account
               </h1>
 
-              <p className="text-base text-slate-400">
+              <p className="text-base-content/60">
                 Get started with your free account
               </p>
             </div>
           </div>
 
+          {/* Signup Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-
-            {/* Full Name Field */}
+            {/* Full Name */}
             <div className="form-control">
-              <label className="mb-2 block">
-                <span className="text-sm font-medium text-slate-300">
+              <label className="label">
+                <span className="label-text text-base-content">
                   Full Name
                 </span>
               </label>
 
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="size-5 text-slate-500" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-10">
+                  <User className="size-5 text-base-content/50" />
                 </div>
 
                 <input
                   type="text"
-                  className="w-full h-12 pl-10 pr-4 rounded-lg border border-slate-700 bg-transparent text-slate-100 placeholder:text-slate-400 outline-none transition-all focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+                  className="input input-bordered w-full pl-10 bg-base-100 text-base-content"
                   placeholder="John Doe"
-                  value={formData.fullname}
+                  value={formData.fullName}
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      fullname: e.target.value,
+                      fullName: e.target.value,
                     })
                   }
                 />
               </div>
             </div>
 
-            {/* Email Field */}
+            {/* Email */}
             <div className="form-control">
-              <label className="mb-2 block">
-                <span className="text-sm font-medium text-slate-300">
+              <label className="label">
+                <span className="label-text text-base-content">
                   Email
                 </span>
               </label>
 
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="size-5 text-slate-500" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-10">
+                  <Mail className="size-5 text-base-content/50" />
                 </div>
 
                 <input
                   type="email"
-                  className="w-full h-12 pl-10 pr-4 rounded-lg border border-slate-700 bg-transparent text-slate-100 placeholder:text-slate-400 outline-none transition-all focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+                  className="input input-bordered w-full pl-10 bg-base-100 text-base-content"
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) =>
@@ -123,22 +123,22 @@ console.log(authUser);
               </div>
             </div>
 
-            {/* Password Field */}
+            {/* Password */}
             <div className="form-control">
-              <label className="mb-2 block">
-                <span className="text-sm font-medium text-slate-300">
+              <label className="label">
+                <span className="label-text text-base-content">
                   Password
                 </span>
               </label>
 
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="size-5 text-slate-500" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-10">
+                  <Lock className="size-5 text-base-content/50" />
                 </div>
 
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="w-full h-12 pl-10 pr-12 rounded-lg border border-slate-700 bg-transparent text-slate-100 placeholder:text-slate-400 outline-none transition-all focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+                  className="input input-bordered w-full pl-10 pr-12 bg-base-100 text-base-content"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) =>
@@ -151,9 +151,9 @@ console.log(authUser);
 
                 <button
                   type="button"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-violet-400 transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-base-content/50 hover:text-base-content"
                   onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <EyeOff className="size-5" />
@@ -167,13 +167,13 @@ console.log(authUser);
             {/* Submit Button */}
             <button
               type="submit"
-              className="h-12 w-full rounded-lg bg-[#7778ff] text-sm font-semibold text-[#171a35] transition-colors hover:bg-[#8585ff] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="btn btn-primary w-full"
               disabled={isSigningUp}
             >
               {isSigningUp ? (
                 <>
-                  <Loader className="size-5 animate-spin" />
-                  Loading...
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Creating Account...
                 </>
               ) : (
                 "Create Account"
@@ -181,27 +181,26 @@ console.log(authUser);
             </button>
           </form>
 
-          {/* Sign In Link */}
+          {/* Login Link */}
           <div className="text-center">
-            <p className="text-sm text-slate-400">
+            <p className="text-base-content/60">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-medium text-violet-400 underline underline-offset-2 hover:text-violet-300 transition-colors"
+                className="link link-primary font-medium"
               >
                 Sign in
               </Link>
             </p>
           </div>
-
         </div>
       </div>
 
-{/* right side */}
-<AuthImagePattern 
-title="Join Our Community"
-subtitle="Connect with Your friends"
-/>
+      {/* Right Side: Theme-Aware Image Pattern */}
+      <AuthImagepattern
+        title="Join our community"
+        subtitle="Connect with friends, share moments, and stay in touch with the people who matter."
+      />
     </div>
   );
 };
