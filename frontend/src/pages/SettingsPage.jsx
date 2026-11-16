@@ -1,3 +1,4 @@
+
 import { THEMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
 import { Send } from "lucide-react";
@@ -15,31 +16,42 @@ const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
 
   const handleThemeChange = (selectedTheme) => {
-  setTheme(selectedTheme);
-};
+    setTheme(selectedTheme);
+  };
 
   return (
-    <div className="min-h-screen w-full bg-base-100 text-base-content px-4 pt-20 pb-10">
-      <div className="max-w-5xl mx-auto space-y-6">
-        <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold">Theme</h2>
+    <div className="min-h-[100dvh] w-full bg-base-100 text-base-content px-3 sm:px-6 pt-16 sm:pt-20 pb-8">
+
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
+
+        {/* Header */}
+        <div className="space-y-1">
+          <h2 className="text-xl sm:text-2xl font-semibold">
+            Theme Settings
+          </h2>
+
           <p className="text-sm text-base-content/70">
             Choose a theme for your chat interface
           </p>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+        {/* Theme Selection */}
+        <div className="grid grid-cols-3 min-[400px]:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3">
+
           {THEMES.map((t) => (
             <button
               key={t}
               type="button"
-              className={`group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors ${
-                theme === t ? "bg-base-200" : "hover:bg-base-200/50"
+              aria-pressed={theme === t}
+              className={`group flex flex-col items-center gap-2 p-2 sm:p-3 rounded-lg transition-colors ${
+                theme === t
+                  ? "bg-base-200 ring-1 ring-primary"
+                  : "hover:bg-base-200/50"
               }`}
               onClick={() => handleThemeChange(t)}
             >
               <div
-                className="relative h-8 w-full rounded-md overflow-hidden"
+                className="relative h-9 sm:h-10 w-full rounded-md overflow-hidden"
                 data-theme={t}
               >
                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
@@ -50,49 +62,78 @@ const SettingsPage = () => {
                 </div>
               </div>
 
-              <span className="text-[11px] font-medium truncate w-full text-center">
+              <span className="text-[11px] sm:text-xs font-medium truncate w-full text-center">
                 {t.charAt(0).toUpperCase() + t.slice(1)}
               </span>
             </button>
           ))}
+
         </div>
 
-        <div>
-          <h3 className="text-lg font-semibold mb-3">Preview</h3>
+        {/* Preview */}
+        <div className="space-y-3">
 
-          <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
-            <div className="p-4 bg-base-200">
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold">
+              Preview
+            </h3>
+
+            <p className="text-sm text-base-content/70">
+              See how your selected theme looks in a conversation.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-sm">
+
+            <div className="p-3 sm:p-5 bg-base-200">
+
               <div className="max-w-lg mx-auto">
+
                 <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden">
-                  <div className="px-4 py-3 border-b border-base-300 bg-base-100">
+
+                  {/* Preview Header */}
+                  <div className="px-3 sm:px-4 py-3 border-b border-base-300 bg-base-100">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
+
+                      <div className="size-9 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium shrink-0">
                         J
                       </div>
 
-                      <div>
-                        <h3 className="font-medium text-sm">John Doe</h3>
-                        <p className="text-xs text-base-content/70">Online</p>
+                      <div className="min-w-0">
+                        <h3 className="font-medium text-sm">
+                          John Doe
+                        </h3>
+
+                        <p className="text-xs text-base-content/70">
+                          Online
+                        </p>
                       </div>
+
                     </div>
                   </div>
 
-                  <div className="p-4 space-y-4 min-h-[200px] max-h-[200px] overflow-y-auto bg-base-100">
+                  {/* Preview Messages */}
+                  <div className="p-3 sm:p-4 space-y-4 min-h-[180px] max-h-[220px] overflow-y-auto bg-base-100">
+
                     {PREVIEW_MESSAGES.map((message) => (
                       <div
                         key={message.id}
                         className={`flex ${
-                          message.isSent ? "justify-end" : "justify-start"
+                          message.isSent
+                            ? "justify-end"
+                            : "justify-start"
                         }`}
                       >
                         <div
-                          className={`max-w-[80%] rounded-xl p-3 shadow-sm ${
+                          className={`max-w-[85%] sm:max-w-[80%] rounded-xl p-3 shadow-sm break-words ${
                             message.isSent
                               ? "bg-primary text-primary-content"
                               : "bg-base-200"
                           }`}
                         >
-                          <p className="text-sm">{message.content}</p>
+                          <p className="text-sm">
+                            {message.content}
+                          </p>
 
                           <p
                             className={`text-[10px] mt-1.5 ${
@@ -106,13 +147,17 @@ const SettingsPage = () => {
                         </div>
                       </div>
                     ))}
+
                   </div>
 
-                  <div className="p-4 border-t border-base-300 bg-base-100">
-                    <div className="flex gap-2">
+                  {/* Preview Input */}
+                  <div className="p-3 sm:p-4 border-t border-base-300 bg-base-100">
+
+                    <div className="flex items-center gap-2">
+
                       <input
                         type="text"
-                        className="input input-bordered flex-1 text-sm h-10"
+                        className="input input-bordered flex-1 min-w-0 text-sm h-10"
                         placeholder="Type a message..."
                         value="This is a preview"
                         readOnly
@@ -120,17 +165,21 @@ const SettingsPage = () => {
 
                       <button
                         type="button"
-                        className="btn btn-primary h-10 min-h-0"
+                        className="btn btn-primary btn-square h-10 min-h-0 shrink-0"
+                        aria-label="Preview send button"
                       >
                         <Send size={18} />
                       </button>
+
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

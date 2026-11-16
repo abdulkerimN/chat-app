@@ -1,25 +1,42 @@
-import React from 'react'
-import Sidebar from '../components/Sidebar'
-import NoChatSelected from '../components/NoChatSelected'
-import { useChatStore } from '../store/useChatStore'
-import ChatContainer from '../components/ChatContainer'
+
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import NoChatSelected from "../components/NoChatSelected";
+import { useChatStore } from "../store/useChatStore";
+import ChatContainer from "../components/ChatContainer";
 
 const HomePage = () => {
-const {selectedUser} =useChatStore()
+  const { selectedUser } = useChatStore();
+
   return (
+    <div className="h-dvh bg-base-200 pt-16">
+      <div className="h-[calc(100dvh-4rem)] md:flex md:items-center md:justify-center md:px-4 md:pt-20">
+        <div className="h-full w-full bg-base-100 md:max-w-6xl md:rounded-lg md:shadow-xl md:h-[calc(100vh-8rem)]">
+          <div className="flex h-full min-h-0 flex-col overflow-hidden md:flex-row md:rounded-lg">
 
-      <div className="h-screen bg-base-200">
-      <div className="flex items-center justify-center pt-20 px-4">
-        <div className="bg-base-100 rounded-lg shadow-cl w-full max-w-6xl h-[calc(100vh-8rem)]">
-          <div className="flex h-full rounded-lg overflow-hidden">
-            <Sidebar />
+            {/* Sidebar */}
+            <div
+              className={`h-full min-h-0 w-full md:w-auto ${
+                selectedUser ? "hidden md:flex" : "flex"
+              }`}
+            >
+              <Sidebar />
+            </div>
 
-            {!selectedUser ? <NoChatSelected /> : <ChatContainer />}
+            {/* Chat Area */}
+            <div
+              className={`h-full min-h-0 w-full min-w-0 flex-1 ${
+                selectedUser ? "flex" : "hidden md:flex"
+              }`}
+            >
+              {selectedUser ? <ChatContainer /> : <NoChatSelected />}
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

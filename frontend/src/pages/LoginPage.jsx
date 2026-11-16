@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import AuthImagePattern from "../components/AuthImagepattern";
@@ -27,35 +28,38 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-base-100 text-base-content">
-      {/* Left Side: Login Form */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+    <div className="min-h-[100dvh] grid lg:grid-cols-2 bg-base-100 text-base-content">
+
+      {/* Login Form */}
+      <div className="flex flex-col justify-center items-center px-4 py-8 sm:px-8 sm:py-12 lg:p-12">
+        <div className="w-full max-w-md space-y-7 sm:space-y-8">
 
           {/* Logo */}
-          <div className="text-center mb-8">
+          <div className="text-center">
             <div className="flex flex-col items-center gap-2 group">
+
               <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors group-hover:bg-primary/20">
                 <MessageSquare className="size-6 text-primary" />
               </div>
 
-              <h1 className="text-2xl font-bold mt-2">
+              <h1 className="text-2xl sm:text-3xl font-bold mt-2">
                 Welcome Back
               </h1>
 
-              <p className="text-base-content/60">
+              <p className="text-sm sm:text-base text-base-content/60">
                 Sign in to your account
               </p>
+
             </div>
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
 
-            {/* Email Field */}
+            {/* Email */}
             <div className="form-control">
               <label className="mb-2 block">
-                <span className="text-sm font-medium text-base-content">
+                <span className="text-sm font-medium">
                   Email
                 </span>
               </label>
@@ -67,7 +71,8 @@ const LoginPage = () => {
 
                 <input
                   type="email"
-                  className="input input-bordered w-full h-12 pl-10 pr-4 bg-base-100 text-base-content placeholder:text-base-content/50"
+                  autoComplete="email"
+                  className="input input-bordered w-full h-12 pl-10 pr-4 bg-base-100 text-base-content text-base"
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) =>
@@ -81,10 +86,10 @@ const LoginPage = () => {
               </div>
             </div>
 
-            {/* Password Field */}
+            {/* Password */}
             <div className="form-control">
               <label className="mb-2 block">
-                <span className="text-sm font-medium text-base-content">
+                <span className="text-sm font-medium">
                   Password
                 </span>
               </label>
@@ -96,7 +101,8 @@ const LoginPage = () => {
 
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="input input-bordered w-full h-12 pl-10 pr-12 bg-base-100 text-base-content placeholder:text-base-content/50"
+                  autoComplete="current-password"
+                  className="input input-bordered w-full h-12 pl-10 pr-12 bg-base-100 text-base-content text-base"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) =>
@@ -111,7 +117,7 @@ const LoginPage = () => {
                 <button
                   type="button"
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-base-content/50 hover:text-primary transition-colors"
+                  className="absolute inset-y-0 right-0 px-3 flex items-center text-base-content/50 hover:text-primary transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -123,7 +129,7 @@ const LoginPage = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               className="btn btn-primary w-full h-12 min-h-0"
@@ -138,9 +144,10 @@ const LoginPage = () => {
                 "Sign in"
               )}
             </button>
+
           </form>
 
-          {/* Sign Up Link */}
+          {/* Signup Link */}
           <div className="text-center">
             <p className="text-sm text-base-content/60">
               Don't have an account?{" "}
@@ -156,11 +163,14 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right Side: Theme-Aware Pattern */}
-      <AuthImagePattern
-        title="Welcome back!"
-        subtitle="Sign in to continue your conversations and catch up with your messages."
-      />
+      {/* Right Side Pattern */}
+      <div className="hidden lg:flex">
+        <AuthImagePattern
+          title="Welcome back!"
+          subtitle="Sign in to continue your conversations and catch up with your messages."
+        />
+      </div>
+
     </div>
   );
 };
