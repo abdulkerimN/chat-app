@@ -6,7 +6,27 @@ A full-stack real-time messaging application built with the **MERN stack**, **So
 
 Watch the application in action:
 
-[▶️ View Chat App Demo]([https://www.awesomescreenshot.com/video/58357882?key=](https://www.awesomescreenshot.com/video/58357882?key=eceeba3f57adef7727cbd92ef3dcef37))
+[▶️ View Chat App Demo](https://www.awesomescreenshot.com/video/58357882?key=eceeba3f57adef7727cbd92ef3dcef37)
+
+## 📸 Screenshots
+
+### Signup Page
+<img width="800" height="426" alt="p2" src="https://github.com/user-attachments/assets/6eb98572-8a18-47a3-a1ed-0960ca1e8c6a" />
+
+### Home Page (when 2 users chat)
+<img width="800" height="426" alt="p1" src="https://github.com/user-attachments/assets/9578132f-8ea4-433e-a1a4-a388eae2ff36" />
+
+###  Profile Page
+<img width="800" height="426" alt="p5" src="https://github.com/user-attachments/assets/c13f8108-869a-459e-b69b-df0a20698b40" />
+
+### Freinds Page
+<img width="800" height="426" alt="photo_6_2026-11-14_21-47-49" src="https://github.com/user-attachments/assets/d8d99d06-8e24-4d4f-a3ac-48f611b0b26c" />
+
+### Settings
+<img width="800" height="426" alt="p6" src="https://github.com/user-attachments/assets/854e4e30-07a8-4b3a-a9d9-e6915235177f" />
+
+### Login page
+<img width="800" height="426" alt="p3" src="https://github.com/user-attachments/assets/f4798f7c-15ba-4e8f-a152-b5265ae01fea" />
 
 ## ✨ Features
 
